@@ -36,6 +36,7 @@ public class BoardApp {
                 System.out.println("=================");
                 for(int i=0; i<titleList.size(); i++){
                     String title = titleList.get(i);
+                    System.out.println("번호 : "+(i + 1));
                     System.out.printf("제목 : %s\n",title);
 
                     String body = bodyList.get(i);
@@ -45,7 +46,20 @@ public class BoardApp {
             }
             // 게시물 수정
             else if (cmd.equals("update")){
+                System.out.print("수정할 게시물 번호를 입력해주세요 : ");
+                int id = Integer.parseInt(scan.nextLine());
 
+                System.out.print("새로운 제목을 입력해주세요 : ");
+                String newTitle = scan.nextLine();
+
+                System.out.print("새로운 내용을 입력해주세요 : ");
+                String newBody = scan.nextLine();
+
+                // 인덱스로 찾아서 수정
+                titleList.set(id - 1, newTitle);
+                bodyList.set(id - 1, newBody);
+
+                System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
             }
         }
     }
