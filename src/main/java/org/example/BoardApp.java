@@ -9,6 +9,8 @@ public class BoardApp {
 
         ArrayList<String> titleList = new ArrayList<>();
         ArrayList<String> bodyList = new ArrayList<>();
+        ArrayList<Integer> idList = new ArrayList<>();
+        int articleId = 1; // 리스트 시작번호 1로 지정
 
         while (true){ // 반복 조건이 true이기 때문에 무한 반복
             System.out.print("명령어 : ");
@@ -29,6 +31,10 @@ public class BoardApp {
                 String body = scan.nextLine();
                 bodyList.add(body);
 
+                // 게시물이 생성될 때마다 번호를 생성해서 저장
+                idList.add(articleId);
+                articleId++; // 게시물이 생성될 때마다 번호 증가
+
                 System.out.println("게시물이 등록되었습니다.");
             }
             // list 게시물 목록
@@ -36,7 +42,10 @@ public class BoardApp {
                 System.out.println("=================");
                 for(int i=0; i<titleList.size(); i++){
                     String title = titleList.get(i);
-                    System.out.println("번호 : "+(i + 1));
+
+                    int id = idList.get(i);
+                    System.out.println("번호 : "+ id);
+
                     System.out.printf("제목 : %s\n",title);
 
                     String body = bodyList.get(i);
@@ -60,6 +69,15 @@ public class BoardApp {
                 bodyList.set(id - 1, newBody);
 
                 System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
+            }
+            else if (cmd.equals("delete")){
+                System.out.print("삭제할 게시물 번호를 입력하세요 : ");
+                int id = Integer.parseInt(scan.nextLine());
+
+                titleList.remove(id-1);
+                bodyList.remove(id-1);
+
+                System.out.printf("%d 게시물이 삭제되었습니다.\n", id);
             }
         }
     }
