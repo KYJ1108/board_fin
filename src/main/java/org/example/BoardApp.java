@@ -51,13 +51,18 @@ public class BoardApp {
                 System.out.print("수정할 게시물 번호를 입력해주세요 : ");
                 int inputId = Integer.parseInt(scan.nextLine());
 
+                int index = findIndexById(inputId);
+                if (index == -1){
+                    System.out.println("없는 게시물입이다.");
+                    continue;
+                }
+
                 System.out.print("새로운 제목을 입력해주세요 : ");
                 String newTitle = scan.nextLine();
 
                 System.out.print("새로운 내용을 입력해주세요 : ");
                 String newBody = scan.nextLine();
 
-                int index = findIndexById(inputId);
                 Article target = articleList.get(index);
                 target.setTitle(newTitle);
                 target.setBody(newBody);
@@ -78,14 +83,13 @@ public class BoardApp {
     // 입력 : 찾고자 하는 게시물 번호
     // 출력 : 게시물 번호에 해당하는 인덱스
     public int findIndexById(int id){
-        int index = -1; // 최종적으로 찾은 목적 인덱스를 저장하기 위함.
         for (int i=0; i<articleList.size(); i++){
             Article article = articleList.get(i);
 
             if (article.getId() == id){
-                index = i;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 }
