@@ -32,7 +32,7 @@ public class BoardApp {
                 bodyList.add(body);
 
                 // 게시물이 생성될 때마다 번호를 생성해서 저장
-                idList.add(latestArticleId );
+                idList.add(latestArticleId);
                 latestArticleId ++; // 게시물이 생성될 때마다 번호 증가
 
                 System.out.println("게시물이 등록되었습니다.");
@@ -79,6 +79,8 @@ public class BoardApp {
 
                     if (targetId == inputId){// 삭제하고자 하는 id와 i번째 id가 같다면
                         idList.remove(i); // 삭제
+                        titleList.remove(i);
+                        bodyList.remove(i);
                     }
                 }
 
