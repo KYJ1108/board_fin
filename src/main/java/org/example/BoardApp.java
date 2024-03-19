@@ -127,6 +127,21 @@ public class BoardApp {
                 System.out.println("조회수 : "+article.getHit());
                 System.out.println("===============");
             }
+            // 검색
+            else if (cmd.equals("search")){
+                System.out.print("검색 키워드를 입력해주세요 : ");
+                String keyword = scan.nextLine();
+
+                for(int i=0; i<articleList.size(); i++){
+                    Article article = articleList.get(i);
+
+                    if(article.getTitle().contains(keyword)){
+                        System.out.println("번호 : "+ article.getId());
+                        System.out.printf("제목 : %s\n",article.getTitle());
+                        System.out.println("===============");
+                    }
+                }
+            }
         }
     }
     // 입력 : 찾고자 하는 게시물 번호
