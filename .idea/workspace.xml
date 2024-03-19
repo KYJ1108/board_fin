@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e838224c-9286-4798-bc2c-9f8ca002f0ee" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Article.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BoardApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BoardApp.java" afterDir="false" />
     </list>
@@ -33,7 +34,9 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2dsmaHZoUnFSYhbS3msXNK15bEP" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

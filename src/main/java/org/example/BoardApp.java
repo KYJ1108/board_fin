@@ -7,9 +7,7 @@ public class BoardApp {
     public void run(){
         Scanner scan = new Scanner(System.in);
 
-        ArrayList<String> titleList = new ArrayList<>();
-        ArrayList<String> bodyList = new ArrayList<>();
-        ArrayList<Integer> idList = new ArrayList<>();
+        ArrayList<Article> articleList = new ArrayList<>();
         int latestArticleId  = 1; // 리스트 시작번호 1로 지정
 
         while (true){ // 반복 조건이 true이기 때문에 무한 반복
@@ -25,31 +23,27 @@ public class BoardApp {
             else if(cmd.equals("add")){
                 System.out.print("게시물 제목을 입력해주세요 : ");
                 String title = scan.nextLine();
-                titleList.add(title); // titleList배열에 title을 추가
 
                 System.out.print("게시물 내용을 입력해주세요 : ");
                 String body = scan.nextLine();
-                bodyList.add(body);
 
                 // 게시물이 생성될 때마다 번호를 생성해서 저장
-                idList.add(latestArticleId);
                 latestArticleId ++; // 게시물이 생성될 때마다 번호 증가
 
+                // 모든 매개변수를 받는 생성자 이용
+                Article article = new Article(latestArticleId, title, body);
+
+                articleList.add(article);
                 System.out.println("게시물이 등록되었습니다.");
             }
             // list 게시물 목록
             else if(cmd.equals("list")){
                 System.out.println("=================");
-                for(int i=0; i<titleList.size(); i++){
-                    String title = titleList.get(i);
+                for(int i=0; i<articleList.size(); i++){
+                    Article article = articleList.get(i);
 
-                    int id = idList.get(i);
-                    System.out.println("번호 : "+ id);
-
-                    System.out.printf("제목 : %s\n",title);
-
-                    String body = bodyList.get(i);
-                    System.out.printf("내용 : %s\n", body);
+                    System.out.println("번호 : "+ article.getId());
+                    System.out.printf("제목 : %s\n",article.getTitle());
                     System.out.println("=================");
                 }
             }
@@ -65,8 +59,8 @@ public class BoardApp {
                 String newBody = scan.nextLine();
 
                 // 인덱스로 찾아서 수정
-                titleList.set(id - 1, newTitle);
-                bodyList.set(id - 1, newBody);
+//                titleList.set(id - 1, newTitle);
+//                bodyList.set(id - 1, newBody);
 
                 System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
             }
@@ -74,13 +68,11 @@ public class BoardApp {
                 System.out.print("삭제할 게시물 번호를 입력하세요 : ");
                 int inputId = Integer.parseInt(scan.nextLine());
 
-                for (int i=0; i<idList.size(); i++){
-                    int targetId = idList.get(i);
+                for (int i=0; i<articleList.size(); i++){
+                    Article target = articleList.get(i);
 
-                    if (targetId == inputId){// 삭제하고자 하는 id와 i번째 id가 같다면
-                        idList.remove(i); // 삭제
-                        titleList.remove(i);
-                        bodyList.remove(i);
+                    if (target.getId() == inputId){// 삭제하고자 하는 id와 i번째 id가 같다면
+                        articleList.remove(i); // 삭제
                     }
                 }
 
