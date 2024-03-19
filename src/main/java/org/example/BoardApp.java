@@ -75,8 +75,32 @@ public class BoardApp {
                 int inputId = Integer.parseInt(scan.nextLine());
 
                 int index = findIndexById(inputId);
+
+                if (index == -1){
+                    System.out.println("없는 게시물입니다.");
+                    continue;
+                }
+
                 articleList.remove(index);
                 System.out.printf("%d 게시물이 삭제되었습니다.\n", inputId);
+            }
+            else if (cmd.equals("detail")){
+                System.out.print("상세보기 할 게시물 번호를 입력해주세요 : ");
+                int inputId = Integer.parseInt(scan.nextLine());
+
+                int index = findIndexById(inputId);
+
+                if (index == -1){
+                    System.out.println("없는 게시물 입니다.");
+                    continue;
+                }
+                Article article = articleList.get(index);
+
+                System.out.println("===============");
+                System.out.println("번호 : "+article.getId());
+                System.out.println("제목 : "+article.getTitle());
+                System.out.println("내용 : "+article.getBody());
+                System.out.println("===============");
             }
         }
     }
