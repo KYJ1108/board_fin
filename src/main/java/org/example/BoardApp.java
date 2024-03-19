@@ -8,17 +8,17 @@ import  java.time.format.DateTimeFormatter;
 
 public class BoardApp {
     ArrayList<Article> articleList = new ArrayList<>(); // 인스턴스 변수
+
     public void run(){
         Scanner scan = new Scanner(System.in);
+        int latestArticleId = 4; // 테스트 데이터 3개 있으므로 시작 번호를 4로 지정
 
-        int latestArticleId  = 4; // 리스트 시작번호 1로 지정
-        Article a1 = new Article(1, "안녕하세요 반갑습니다. 자바 공부중이에요.", "냉무",0, getCurrentDateTime());
-        Article a2 = new Article(2, "자바 질문좀 할게요~", "냉무",0, getCurrentDateTime());
-        Article a3 = new Article(3, "정처기 따야되나요?", "냉무",0, getCurrentDateTime());
+        Article a1 = new Article(1, "안녕하세요 반갑습니다. 자바 공부중이에요.", "냉무", 0, getCurrentDateTime());
+        Article a2 = new Article(2, "자바 질문좀 할게요~", "냉무", 0, getCurrentDateTime());
+        Article a3 = new Article(3, "정처기 따야되나요?", "냉무", 0, getCurrentDateTime());
         articleList.add(a1);
         articleList.add(a2);
         articleList.add(a3);
-
 
         while (true){ // 반복 조건이 true이기 때문에 무한 반복
             System.out.print("명령어 : ");
@@ -29,6 +29,7 @@ public class BoardApp {
                 System.out.println("프로그램을 종료합니다.");
                 break; // 반복문 탈출
             }
+
             // add 게시물 등록
             else if(cmd.equals("add")){
                 System.out.print("게시물 제목을 입력해주세요 : ");
@@ -55,13 +56,7 @@ public class BoardApp {
             // list 게시물 목록
             else if(cmd.equals("list")){
                 System.out.println("=================");
-                for(int i=0; i<articleList.size(); i++){
-                    Article article = articleList.get(i);
-
-                    System.out.println("번호 : "+ article.getId());
-                    System.out.printf("제목 : %s\n",article.getTitle());
-                    System.out.println("=================");
-                }
+                printArticleList(this.articleList);
             }
             // 게시물 수정
             else if (cmd.equals("update")){
@@ -132,15 +127,16 @@ public class BoardApp {
                 System.out.print("검색 키워드를 입력해주세요 : ");
                 String keyword = scan.nextLine();
 
+                ArrayList<Article> searchedList = new ArrayList<>();
+
                 for(int i=0; i<articleList.size(); i++){
                     Article article = articleList.get(i);
 
-                    if(article.getTitle().contains(keyword)){
-                        System.out.println("번호 : "+ article.getId());
-                        System.out.printf("제목 : %s\n",article.getTitle());
-                        System.out.println("===============");
+                  if (article.getTitle().contains(keyword)){
+                      searchedList.add(article);
                     }
                 }
+                printArticleList(searchedList);
             }
         }
     }
@@ -166,5 +162,15 @@ public class BoardApp {
         String formattedDate = now.format(formatter);
 
         return formattedDate;
+    }
+
+    public void printArticleList(ArrayList<Article> targetList){
+        for (int i=0; i<targetList.size(); i++){
+            Article article = targetList.get(i);
+
+            System.out.println("번호 : "+article.getId());
+            System.out.printf("제목 : %s\n",article.getTitle());
+            System.out.println("===============");
+        }
     }
 }

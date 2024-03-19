@@ -19,7 +19,7 @@ public class Article {
         this.hit = hit;
         this.regDate = regDate;
     }
-    public void increaseHit(){
+    public void increaseHit (){
         this.hit++;
     }
 
