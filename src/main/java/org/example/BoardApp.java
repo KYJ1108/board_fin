@@ -11,7 +11,14 @@ public class BoardApp {
     public void run(){
         Scanner scan = new Scanner(System.in);
 
-        int latestArticleId  = 1; // 리스트 시작번호 1로 지정
+        int latestArticleId  = 4; // 리스트 시작번호 1로 지정
+        Article a1 = new Article(1, "안녕하세요 반갑습닏. 자바 공부중이에요.", "냉무", getCurrentDateTime());
+        Article a2 = new Article(2, "자바 질문좀 할게요~", "냉무", getCurrentDateTime());
+        Article a3 = new Article(3, "정처기 따야되나요?", "냉무", getCurrentDateTime());
+        articleList.add(a1);
+        articleList.add(a2);
+        articleList.add(a3);
+
 
         while (true){ // 반복 조건이 true이기 때문에 무한 반복
             System.out.print("명령어 : ");
@@ -38,7 +45,7 @@ public class BoardApp {
                 String formattedDate = now.format(formatter);
 
                 // 모든 매개변수를 받는 생성자 이용
-                Article article = new Article(latestArticleId, title, body, formattedDate);
+                Article article = new Article(latestArticleId, title, body, getCurrentDateTime());
 
                 articleList.add(article);
                 System.out.println("게시물이 등록되었습니다.");
@@ -94,6 +101,7 @@ public class BoardApp {
                 articleList.remove(index);
                 System.out.printf("%d 게시물이 삭제되었습니다.\n", inputId);
             }
+            // 게시물 상세보기
             else if (cmd.equals("detail")){
                 System.out.print("상세보기 할 게시물 번호를 입력해주세요 : ");
                 int inputId = Integer.parseInt(scan.nextLine());
@@ -122,9 +130,20 @@ public class BoardApp {
             Article article = articleList.get(i);
 
             if (article.getId() == id){
-                return i;
+                return i; // 원하는 것은 찾은 즉시 종료.
             }
         }
         return -1;
+    }
+    public String getCurrentDateTime() {
+        LocalDateTime now = LocalDateTime.now();
+
+        // 날짜와 시간의 형식을 지정
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+
+        // 지정한 형식으로 날짜와 시간 출력
+        String formattedDate = now.format(formatter);
+
+        return formattedDate;
     }
 }
