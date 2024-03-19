@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardApp {
+    ArrayList<Article> articleList = new ArrayList<>(); // 인스턴스 변수
     public void run(){
         Scanner scan = new Scanner(System.in);
 
-        ArrayList<Article> articleList = new ArrayList<>();
         int latestArticleId  = 1; // 리스트 시작번호 1로 지정
 
         while (true){ // 반복 조건이 true이기 때문에 무한 반복
@@ -57,30 +57,35 @@ public class BoardApp {
                 System.out.print("새로운 내용을 입력해주세요 : ");
                 String newBody = scan.nextLine();
 
-                for (int i=0; i<articleList.size(); i++){
-                    Article target = articleList.get(i);
-
-                    if (target.getId() == inputId){
-                        target.setTitle(newTitle); // target은 참조값이므로 직접 객체를 접근하여 수정 가능
-                        target.setBody(newBody);
-                    }
-                }
+                int index = findIndexById(inputId);
+                Article target = articleList.get(index);
+                target.setTitle(newTitle);
+                target.setBody(newBody);
 
                 System.out.printf("%d번 게시물이 수정되었습니다.\n", inputId);
             }
+            // 게시물 삭제
             else if (cmd.equals("delete")){
                 System.out.print("삭제할 게시물 번호를 입력하세요 : ");
                 int inputId = Integer.parseInt(scan.nextLine());
 
-                for (int i=0; i<articleList.size(); i++){
-                    Article target = articleList.get(i);
-
-                    if (target.getId() == inputId){// 삭제하고자 하는 id와 i번째 id가 같다면
-                        articleList.remove(i); // 삭제
-                    }
-                }
+                int index = findIndexById(inputId);
+                articleList.remove(index);
                 System.out.printf("%d 게시물이 삭제되었습니다.\n", inputId);
             }
         }
+    }
+    // 입력 : 찾고자 하는 게시물 번호
+    // 출력 : 게시물 번호에 해당하는 인덱스
+    public int findIndexById(int id){
+        int index = -1; // 최종적으로 찾은 목적 인덱스를 저장하기 위함.
+        for (int i=0; i<articleList.size(); i++){
+            Article article = articleList.get(i);
+
+            if (article.getId() == id){
+                index = i;
+            }
+        }
+        return index;
     }
 }
