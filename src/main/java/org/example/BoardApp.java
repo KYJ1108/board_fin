@@ -27,14 +27,13 @@ public class BoardApp {
                 System.out.print("게시물 내용을 입력해주세요 : ");
                 String body = scan.nextLine();
 
-                // 게시물이 생성될 때마다 번호를 생성해서 저장
-                latestArticleId ++; // 게시물이 생성될 때마다 번호 증가
-
                 // 모든 매개변수를 받는 생성자 이용
                 Article article = new Article(latestArticleId, title, body);
 
                 articleList.add(article);
                 System.out.println("게시물이 등록되었습니다.");
+
+                latestArticleId ++; // 게시물이 생성될 때마다 번호 증가
             }
             // list 게시물 목록
             else if(cmd.equals("list")){
@@ -50,7 +49,7 @@ public class BoardApp {
             // 게시물 수정
             else if (cmd.equals("update")){
                 System.out.print("수정할 게시물 번호를 입력해주세요 : ");
-                int id = Integer.parseInt(scan.nextLine());
+                int inputId = Integer.parseInt(scan.nextLine());
 
                 System.out.print("새로운 제목을 입력해주세요 : ");
                 String newTitle = scan.nextLine();
@@ -58,11 +57,16 @@ public class BoardApp {
                 System.out.print("새로운 내용을 입력해주세요 : ");
                 String newBody = scan.nextLine();
 
-                // 인덱스로 찾아서 수정
-//                titleList.set(id - 1, newTitle);
-//                bodyList.set(id - 1, newBody);
+                for (int i=0; i<articleList.size(); i++){
+                    Article target = articleList.get(i);
 
-                System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
+                    if (target.getId() == inputId){
+                        target.setTitle(newTitle); // target은 참조값이므로 직접 객체를 접근하여 수정 가능
+                        target.setBody(newBody);
+                    }
+                }
+
+                System.out.printf("%d번 게시물이 수정되었습니다.\n", inputId);
             }
             else if (cmd.equals("delete")){
                 System.out.print("삭제할 게시물 번호를 입력하세요 : ");
@@ -75,7 +79,6 @@ public class BoardApp {
                         articleList.remove(i); // 삭제
                     }
                 }
-
                 System.out.printf("%d 게시물이 삭제되었습니다.\n", inputId);
             }
         }
