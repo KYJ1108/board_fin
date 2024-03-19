@@ -1,17 +1,29 @@
 package org.example;
 
+import java.time.LocalDateTime;
+
 public class Article {
     private int id; // 번호
     private String title; // 제목
     private String body; // 내용
+    private String regDate; //등록날짜
 
     public Article(){
 
     }
-    public Article(int id, String title, String body){
+    public Article(int id, String title, String body, String regDate){
         this.id = id;
         this.title = title;
         this.body = body;
+        this.regDate = regDate;
+    }
+
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
     }
 
     public int getId() {

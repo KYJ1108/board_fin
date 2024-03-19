@@ -3,6 +3,9 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.LocalDateTime;
+import  java.time.format.DateTimeFormatter;
+
 public class BoardApp {
     ArrayList<Article> articleList = new ArrayList<>(); // 인스턴스 변수
     public void run(){
@@ -27,8 +30,15 @@ public class BoardApp {
                 System.out.print("게시물 내용을 입력해주세요 : ");
                 String body = scan.nextLine();
 
+                LocalDateTime now = LocalDateTime.now();
+
+                // 날짜와 시간의 형식을 지정합니다. 여기서는 연-월-일 시:분:초 형식을 사용
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+                // 지정한 형식으로 날짜와 시간을 출력합니다.
+                String formattedDate = now.format(formatter);
+
                 // 모든 매개변수를 받는 생성자 이용
-                Article article = new Article(latestArticleId, title, body);
+                Article article = new Article(latestArticleId, title, body, formattedDate);
 
                 articleList.add(article);
                 System.out.println("게시물이 등록되었습니다.");
@@ -100,6 +110,7 @@ public class BoardApp {
                 System.out.println("번호 : "+article.getId());
                 System.out.println("제목 : "+article.getTitle());
                 System.out.println("내용 : "+article.getBody());
+                System.out.println("등록날짜 : "+article.getRegDate());
                 System.out.println("===============");
             }
         }
