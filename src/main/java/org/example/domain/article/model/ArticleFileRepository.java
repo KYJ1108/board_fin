@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleFileRepository {
     private int latestId = 1;
@@ -44,6 +45,9 @@ public class ArticleFileRepository {
 
         // 게시물 저장
         CommonUtil commonUtil = new CommonUtil();
+
+        latestId++;
+
         Article a1 = new Article(latestId, title, body, 0, commonUtil.getCurrentDateTime());
         articleList.add(a1);
 
@@ -71,4 +75,7 @@ public class ArticleFileRepository {
         }
         return articleList;
     }
+//    public Article findById(int id){
+//
+//    }
 }

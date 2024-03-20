@@ -16,6 +16,10 @@ public class ArticleTestController {
     Scanner scan = commonUtil.getScanner();
     int WRONG_VALUE = -1;
 
+//    public Article findArticleById(int id){
+//        return articleRepository.findById(id);
+//    }
+
     public void add() {
 
         System.out.print("게시물 제목을 입력해주세요 : ");
