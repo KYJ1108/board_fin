@@ -11,6 +11,7 @@ public class BoardApp {
 
     Scanner scan = new Scanner(System.in);
     int latestArticleId = 4; // 테스트 데이터 3개 있으므로 시작 번호를 4로 지정
+    int WRONG_VALUE = -1; // 값의 의미를 부여
 
     public void run() {
         makeTestData();
@@ -58,7 +59,10 @@ public class BoardApp {
     // 게시물 수정
     private void update(){
         System.out.print("수정할 게시물 번호를 입력해주세요 : ");
-        int inputId = Integer.parseInt(scan.nextLine());
+        int inputId = getParamAsInt(scan.nextLine(), WRONG_VALUE);
+        if (inputId == WRONG_VALUE){
+            return;
+        }
 
         Article article = findArticleById(inputId);
         if (article == null) {
@@ -80,7 +84,10 @@ public class BoardApp {
     // 게시물 삭제
     private void delete(){
         System.out.print("삭제할 게시물 번호를 입력하세요 : ");
-        int inputId = Integer.parseInt(scan.nextLine());
+        int inputId = getParamAsInt(scan.nextLine(), WRONG_VALUE);
+        if (inputId == WRONG_VALUE){
+            return;
+        }
 
         Article article = findArticleById(inputId);
 
@@ -96,7 +103,10 @@ public class BoardApp {
     // 게시물 상세보기
     private void detail(){
         System.out.print("상세보기 할 게시물 번호를 입력해주세요 : ");
-        int inputId = Integer.parseInt(scan.nextLine());
+        int inputId = getParamAsInt(scan.nextLine(), WRONG_VALUE);
+        if (inputId == WRONG_VALUE){
+            return;
+        }
 
         Article article = findArticleById(inputId);
 
@@ -173,6 +183,14 @@ public class BoardApp {
             System.out.println("번호 : "+article.getId());
             System.out.printf("제목 : %s\n", article.getTitle());
             System.out.println("===============");
+        }
+    }
+    private int getParamAsInt(String param, int defaultValue){
+        try {
+            return Integer.parseInt(param);
+        }catch (NumberFormatException e){
+            System.out.println("숫자를 입력해주세요.");
+            return defaultValue;
         }
     }
 }
