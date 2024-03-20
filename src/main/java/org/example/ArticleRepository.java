@@ -1,14 +1,22 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ArticleRepository {
+    CommonUtil commonUtil = new CommonUtil();
     ArrayList<Article> articleList = new ArrayList<>(); // 인스턴스 변수
+
+    ArticleView articleView = new ArticleView();
+    Scanner scan = commonUtil.getScanner();
+    int WRONG_VALUE = -1;
+    int latestArticleId = 4;
+
     // 게시물 미리 등록 test용
     private void makeTestData() {
-        Article a1 = new Article(1, "안녕하세요 반갑습니다. 자바 공부중이에요.", "냉무", 0, getCurrentDateTime());
-        Article a2 = new Article(2, "자바 질문좀 할게요~", "냉무", 0, getCurrentDateTime());
-        Article a3 = new Article(3, "정처기 따야되나요?", "냉무", 0, getCurrentDateTime());
+        Article a1 = new Article(1, "안녕하세요 반갑습니다. 자바 공부중이에요.", "냉무", 0, commonUtil.getCurrentDateTime());
+        Article a2 = new Article(2, "자바 질문좀 할게요~", "냉무", 0, commonUtil.getCurrentDateTime());
+        Article a3 = new Article(3, "정처기 따야되나요?", "냉무", 0, commonUtil.getCurrentDateTime());
         articleList.add(a1);
         articleList.add(a2);
         articleList.add(a3);
@@ -22,7 +30,7 @@ public class ArticleRepository {
         String body = scan.nextLine();
 
         // 모든 매개변수를 받는 생성자 이용
-        Article article = new Article(latestArticleId, title, body, 0, getCurrentDateTime());
+        Article article = new Article(latestArticleId, title, body, 0, commonUtil.getCurrentDateTime());
 
         articleList.add(article);
         System.out.println("게시물이 등록되었습니다.");
@@ -32,7 +40,7 @@ public class ArticleRepository {
     // 게시물 목록
     private void list(){
         System.out.println("=================");
-        printArticleList(this.articleList);
+        commonUtil.printArticleList(this.articleList);
     }
     // 게시물 수정
     private void update(){
@@ -117,7 +125,7 @@ public class ArticleRepository {
                 searchedList.add(article);
             }
         }
-        printArticleList(searchedList);
+        commonUtil.printArticleList(searchedList);
     }
     // 입력 : 찾고자 하는 게시물 번호
     // 출력 : 게시물 번호에 해당하는 인덱스
@@ -130,5 +138,13 @@ public class ArticleRepository {
             }
         }
         return null;
+    }
+    private int getParamAsInt(String param, int defaultValue){
+        try {
+            return Integer.parseInt(param);
+        }catch (NumberFormatException e){
+            System.out.println("숫자를 입력해주세요.");
+            return defaultValue;
+        }
     }
 }
