@@ -1,11 +1,10 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import org.example.base.BoardApp;
 
 public class Main {
     public static void main(String[] args) {
-        BoardApp app = new BoardApp(); // 게시물 활성화 코드 불러옴
+        BoardApp app = new BoardApp();
         app.run();
     }
 }

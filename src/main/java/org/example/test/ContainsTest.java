@@ -1,4 +1,4 @@
-package org.example;
+package org.example.test;
 
 public class ContainsTest {
     public static void main(String[] args) {
