@@ -12,7 +12,7 @@ public class Article {
 
     private String regDate; // 등록날짜
 
-    public Article(int id, String title, String body, int hit, LocalDateTime now) {
+    public Article() {
     }
 
     public Article(int id, String title, String body, int hit, String regDate) {

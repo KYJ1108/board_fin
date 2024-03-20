@@ -1,12 +1,11 @@
 package org.example.base;
 
-import org.example.domain.article.controller.ArticleController;
-import org.example.domain.article.controller.ArticleController2;
+import org.example.domain.article.controller.ArticleTestController;
 
 import java.util.Scanner;
 
 public class BoardApp {
-    ArticleController2 articleController = new ArticleController2();
+    ArticleTestController articleController = new ArticleTestController();
     Scanner scan = new Scanner(System.in);
     public void run() {
 
@@ -21,7 +20,7 @@ public class BoardApp {
 
             switch (cmd) {
                 case "add" -> articleController.add();
-//                case "list" -> articleController.list();
+                case "list" -> articleController.list();
 //                case "update" -> articleController.update();
 //                case "delete" -> articleController.delete();
 //                case "detail" -> articleController.detail();
